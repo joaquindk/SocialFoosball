@@ -1,3 +1,3 @@
-# react-todo-list
+# React social foosball
 
-This is a simple todo list app built with React, Redux and Webpack. I built this app during my [tutorial series on YouTube](https://www.youtube.com/playlist?list=PLQDnxXqV213JJFtDaG0aE9vqvp6Wm7nBg).
+This is a foosball match generating app that allows Schantz employees to sign up to play games against random players.
