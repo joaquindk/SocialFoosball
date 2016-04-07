@@ -63,12 +63,12 @@ mongoose.connect('mongodb://localhost/foosball', function(err, res) {
   players.route('/players')
     .get(PlayerCtrl.findAllTodayPlayers)
     .delete((req, res) => {
-      io.sockets.emit('update');
       PlayerCtrl.deletePlayer(req, res);
+      io.sockets.emit('update');
     })
     .post((req, res) => {
-      io.sockets.emit('update');
       PlayerCtrl.addPlayer(req, res);
+      io.sockets.emit('update');
     });
   app.use('/api', players);
 
