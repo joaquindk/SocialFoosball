@@ -5,6 +5,8 @@ import MatchList from './MatchList'
 import { connect } from 'react-redux'
 import actions from '../redux/actions'
 
+require("../css/social.css")
+
 
 
 class App extends Component {
@@ -15,10 +17,6 @@ class App extends Component {
     this.props.socket.on('update', () => {
       this.props.dispatch(actions.requestParticipants());
     });
-  }
-
-  handleData(data) {
-    console.log('Data received from socket: ' + data);
   }
 
   render() {
