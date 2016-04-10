@@ -5,7 +5,7 @@ import MatchList from './MatchList'
 import { connect } from 'react-redux'
 import actions from '../redux/actions'
 
-require("../css/social.css")
+import css from "../css/social.css"
 
 
 
