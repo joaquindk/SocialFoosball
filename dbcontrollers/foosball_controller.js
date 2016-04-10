@@ -52,20 +52,30 @@ exports.addPlayer = function(req, res) {
     console.log(req.body);
 
     _findAllTodayPlayers((err, players) => {
-      if(players.length < 20) {
-        var addedPlayer = new PlayerDB({
-            name:    req.body.name,
-            points:  req.body.points !== null && req.body.points ? req.body.points : 1000,
-            subscribedTo:  new Date()
-        });
+      if(req.body.name !== null && req.body.name.trim() !== '') {
+        if(players.length < 20) {
+          var existantPlayer = players.filter((player) => player.name.toUpperCase() === req.body.name.toUpperCase());
+          if(existantPlayer == null || existantPlayer.length == 0) {
+            var addedPlayer = new PlayerDB({
+                name:    req.body.name,
+                points:  req.body.points !== null && req.body.points ? req.body.points : 1000,
+                subscribedTo:  new Date()
+            });
 
-        addedPlayer.save(function(err, addedPlayer) {
-            if(err) return res.status(500).send( err.message);
-        res.status(200).jsonp(addedPlayer);
-        });
-      }else {
-        return res.status(500).send( 'No more players for today');
+            addedPlayer.save(function(err, addedPlayer) {
+                if(err) return res.status(500).send( err.message);
+            res.status(200).jsonp(addedPlayer);
+            });
+          } else {
+            return res.status(500).send( 'Player already exists');
+          }
+        }else {
+          return res.status(500).send( 'No more players for today');
+        }
+      } else {
+        return res.status(500).send( 'Name cannot be empty');
       }
+
 
     });
 };
