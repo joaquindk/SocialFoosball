@@ -1,7 +1,7 @@
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
-var server = "http://localhost:3000";
+var server = "http://localhost:3000/";
 
 function fetchingPlayers(loading) {
   return {
@@ -117,7 +117,7 @@ let actions = {
   addPlayer: function(name, points) {
     return function(dispatch, getState) {
       var state = getState();
-      var url = "http://localhost:3000/api/players";
+      var url = server + "api/players";
       var player = {name: name, points: points};
       dispatch(addingPlayer(player));
       var strPlayer = JSON.stringify(player);
@@ -151,7 +151,7 @@ let actions = {
   deletePlayer: function(player) {
     return function(dispatch, getState) {
       var state = getState();
-      var url = "http://localhost:3000/api/players";
+      var url = server + "api/players";
       dispatch(deletingPlayer(player));
       var strPlayer = JSON.stringify(player);
       return fetch(url,
