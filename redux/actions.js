@@ -64,7 +64,7 @@ function receivedMatches(matchesJson) {
 function _internalFetchParticipants() {
   return function(dispatch, getState) {
     var state = getState();
-    var url = server + "/api/players";
+    var url = server + "api/players";
     dispatch(fetchingPlayers(true));
 
     return fetch(url)
