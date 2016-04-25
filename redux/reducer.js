@@ -1,11 +1,13 @@
+import objectAssign from 'object-assign'
+
 let reducer = function(state, action) {
   switch (action.type) {
     case 'RECEIVED_PLAYERS':
-      return Object.assign({}, state, {
+      return objectAssign({}, state, {
         players: action.data
       })
     case 'RECEIVED_MATCHES':
-        return Object.assign({}, state, {
+        return objectAssign({}, state, {
           matches: action.data
         })
     default:

@@ -82,7 +82,7 @@ function _internalFetchParticipants() {
         dispatch(_internalFetchMatches());
       })
       .catch(function(err) {
-        console.log("Oops...", "Couldn't fetch repos for user: error");
+        console.log("Oops...", "Couldn't fetch repos for user: error" + err);
       });
   }
 }
@@ -108,7 +108,7 @@ function _internalFetchMatches() {
         dispatch(receivedMatches(jsonResult));
       })
       .catch(function(err) {
-        console.log("Oops...", "Couldn't fetch repos for user: error");
+        console.log("Oops...", "Couldn't fetch repos for user: error"  + err);
       });
   }
 }
@@ -143,7 +143,7 @@ let actions = {
         dispatch(_internalFetchParticipants());
       })
       .catch(function(err) {
-        console.log("Oops...", "Couldn't fetch repos for user: error");
+        console.log("Oops...", "Couldn't fetch repos for user: error"  + err);
       });
     }
   },
@@ -176,7 +176,7 @@ let actions = {
         dispatch(_internalFetchParticipants());
       })
       .catch(function(err) {
-        console.log("Oops...", "Couldn't fetch repos for user: error");
+        console.log("Oops...", "Couldn't fetch repos for user: error"  + err);
       });
     }
   },
