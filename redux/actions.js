@@ -1,6 +1,8 @@
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
+var server = "http://localhost:3000";
+
 function fetchingPlayers(loading) {
   return {
     type: 'FETCHING_PLAYERS',
@@ -62,7 +64,7 @@ function receivedMatches(matchesJson) {
 function _internalFetchParticipants() {
   return function(dispatch, getState) {
     var state = getState();
-    var url = "http://localhost:3000/api/players";
+    var url = server + "/api/players";
     dispatch(fetchingPlayers(true));
 
     return fetch(url)
@@ -88,7 +90,7 @@ function _internalFetchParticipants() {
 function _internalFetchMatches() {
   return function(dispatch, getState) {
     var state = getState();
-    var url = "http://localhost:3000/api/matches";
+    var url = server + "api/matches";
     dispatch(fetchingMatches(true));
 
     return fetch(url)
