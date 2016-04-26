@@ -130,7 +130,7 @@ exports.generateMatches = function() {
       tables.splice(0, 1);
       //todo matching logic
 
-      //Find max score and ming score
+      //Find max score and min score
       var allPlayers = [player1, player2, player3, player4];
       allPlayers.sort((p1, p2) => p1.points < p2.points);
 
@@ -148,22 +148,44 @@ exports.generateMatches = function() {
       });
     }
 
-    if(unassignedPlayers > 0) {//create a one/two player match
+    if(unassignedPlayers > 0) {//create a one/two/three player match
       var player1 = players[0];
       players.splice(0, 1);
 
       var player2 = players !== null && players.length > 0 ? players[0] : null;
-      var addedMatch = new MatchDB({
-        table:    tables[0],
-        teamA:    [player1],
-        teamB:    player2 !== null ? [player2] : [],
-        matchDate: new Date()
-      })
+      if(player2 !== null) players.splice(0, 1);
 
-      addedMatch.save(function(err, addedMatch) {
-          //match saved
-          console.log("Match saved");
-      });
+      var player3 = players !== null && players.length > 0 ? players[0] : null;
+
+      if(player3 == null) { //one/two man game
+        var addedMatch = new MatchDB({
+          table:    tables[0],
+          teamA:    [player1],
+          teamB:    player2 !== null ? [player2] : [],
+          matchDate: new Date()
+        });
+
+        addedMatch.save(function(err, addedMatch) {
+            //match saved
+            console.log("Match saved");
+        });
+      } else { //three man game
+        //Find max score and min score
+        var allPlayers = [player1, player2, player3];
+        allPlayers.sort((p1, p2) => p1.points < p2.points);
+
+        var addedMatch = new MatchDB({
+          table:    tables[0],
+          teamA:    [allPlayers[1], allPlayers[2]],
+          teamB:    [allPlayers[0]],
+          matchDate: new Date()
+        });
+
+        addedMatch.save(function(err, addedMatch) {
+            //match saved
+            console.log("Match saved");
+        });
+      }
     }
   });
 }

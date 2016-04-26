@@ -77,7 +77,7 @@ mongoose.connect('mongodb://localhost/foosball', function(err, res) {
   app.use('/api', matches);
 
   //CRON like jobs
-  var j = scheduler.scheduleJob('0 30 10 * * *', function(){
+  var j = scheduler.scheduleJob('0 30 13 * * *', function(){
     console.log('Scheduled job: ' + new Date());
     PlayerCtrl.generateMatches();
     io.sockets.emit('update');
